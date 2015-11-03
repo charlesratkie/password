@@ -25,6 +25,7 @@ bool caps(char password[]);
 bool first_letter(char password[]);
 bool symbol(char password[]);
 bool number(char password[]);
+bool space(char password[]);
 
 
 int main()
@@ -60,28 +61,6 @@ int main()
 	cout << "4. Favorite Number: " << fav_num << endl;
 
 
-//	if ( caps(password) != true && first_letter(password) != true && symbol(password) != true && number(password) != true )
-//		cout << "Sweet!" << endl;
-
-
-
-	get_password(password);
-
-	if(caps(password) == true)
-	{
-		cout << "great" << endl;
-	}
-	else
-	{
-		cout << "wrong" << endl;
-	}
-
-
-
-
-
-
-/*
 
 	password_rules();
 	do
@@ -95,9 +74,9 @@ int main()
 		count = 0;
 	    }
 
-	} while ( caps(password
+	} while ( caps(password) == true && first_letter(password) == true && symbol(password) == true && number(password) == true && space(password) == true );
 
-
+/*
 	// Compare Password for strength
 	if (password[0] == last_name[0])
 
@@ -240,25 +219,15 @@ void validate_num(char array[])
 
 bool caps(char password[])
 {
-    int i = 0;
-    char a;
-
-    while (password[i])
+    int len = strlen(password);
+    for (int i = 0; i < len; i++)
     {
-        a = password[i];
-	i++;
-	if (isupper(a))
+	if(isupper(password[i]))
 	{
 	    return true;
 	}
-	else
-	{
-	    return false;
-	}
-
-
-
     }
+return false;
 }
 bool first_letter(char password[])
 {
@@ -266,10 +235,7 @@ bool first_letter(char password[])
 	{
 	    return true;
 	}
-	else
-	{
-	    return false;
-	}
+return false;
 
 }
 bool symbol(char password[])
@@ -277,17 +243,26 @@ bool symbol(char password[])
     int len = strlen(password);
     for (int i = 0; i < len; i++)
     {
-	if (!isalpha(password[i]) && !isdigit(password[i]))
+	if ( (!isalpha(password[i])) && (!isdigit(password[i])) )
 	{
 	    return true;
 	}
-	else
-	{
-	    return false;
-	}
     }
+return false;
 }
 bool number(char password[])
+{
+    int len = strlen(password);
+    for (int i = 0; i < len; i++)
+    {
+	if(isdigit(password[i]))
+	{
+	    return true;
+	}
+    }
+return false;
+}
+bool space(char password[])
 {
     int len = strlen(password);
     for (int i = 0; i < len; i++)
@@ -296,11 +271,8 @@ bool number(char password[])
 	{
 	    return true;
 	}
-	else
-	{
-	    return false;
-	}
     }
+return false;
 }
 
 
